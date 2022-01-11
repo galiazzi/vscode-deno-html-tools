@@ -1,0 +1,18 @@
+{
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "editor.rulers": [
+    80
+  ],
+  "deno.lint": true,
+  "[typescript][javascript][json]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  },
+  "files.exclude": {
+    "out": false
+  },
+  "search.exclude": {
+    "out": true
+  },
+  "typescript.tsc.autoDetect": "off",
+}
