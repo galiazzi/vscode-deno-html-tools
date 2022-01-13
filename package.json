@@ -1,18 +1,19 @@
 {
   "name": "vscode-deno-html-tools",
-  "displayName": "vscode-deno-html-tools",
+  "displayName": "deno-html-tools",
   "repository": {
     "url": "https://github.com/galiazzi/vscode-deno-html-tools"
   },
   "description": "",
   "version": "0.0.1",
   "publisher": "dayan",
+  "icon": "icon.png",
   "license": "MIT",
   "engines": {
     "vscode": "^1.63.0"
   },
   "categories": [
-    "Other"
+    "Formatters"
   ],
   "activationEvents": [
     "onLanguage:html"
