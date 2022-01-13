@@ -6,9 +6,7 @@ const beautifyHtml = require("js-beautify").html;
 const execa = require("execa");
 
 export function activate(_context: vscode.ExtensionContext) {
-  console.log(
-    'Congratulations, your extension "vscode-deno-html-tools" is now active!',
-  );
+  console.log("vscode-deno-html-tools active");
 
   vscode.languages.registerDocumentRangeFormattingEditProvider("html", {
     async provideDocumentRangeFormattingEdits(document: vscode.TextDocument) {
@@ -50,7 +48,7 @@ function denoFmt(code: string): Promise<string> {
       "run",
       "-A",
       "--no-check",
-      "https://raw.githubusercontent.com/galiazzi/deno-html-tools/main/index.ts",
+      "https://raw.githubusercontent.com/galiazzi/deno-html-tools/v0.1.0/src/index.ts",
       "fmt",
       "-",
     ],
