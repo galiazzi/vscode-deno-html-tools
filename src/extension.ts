@@ -8,27 +8,30 @@ const execa = require("execa");
 export function activate(_context: vscode.ExtensionContext) {
   console.log("vscode-deno-html-tools active");
 
-  vscode.languages.registerDocumentRangeFormattingEditProvider("html", {
-    async provideDocumentRangeFormattingEdits(document: vscode.TextDocument) {
-      if (document.isUntitled) {
-        return;
-      }
+  vscode.languages.registerDocumentRangeFormattingEditProvider(
+    ["html", "vue"],
+    {
+      async provideDocumentRangeFormattingEdits(document: vscode.TextDocument) {
+        if (document.isUntitled) {
+          return;
+        }
 
-      let code: string;
-      try {
-        code = await format(document.getText());
-      } catch (err) {
-        vscode.window.showErrorMessage(`Deno fmt error: ${err}`);
-        return;
-      }
+        let code: string;
+        try {
+          code = await format(document.getText());
+        } catch (err) {
+          vscode.window.showErrorMessage(`Deno fmt error: ${err}`);
+          return;
+        }
 
-      const fullRange = new vscode.Range(
-        document.positionAt(0),
-        document.positionAt(document.getText().length),
-      );
-      return [new vscode.TextEdit(fullRange, code)];
+        const fullRange = new vscode.Range(
+          document.positionAt(0),
+          document.positionAt(document.getText().length),
+        );
+        return [new vscode.TextEdit(fullRange, code)];
+      },
     },
-  });
+  );
 }
 
 export function deactivate() {}
