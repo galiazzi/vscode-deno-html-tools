@@ -50,8 +50,7 @@ function denoFmt(code: string): Promise<string> {
     [
       "run",
       "-A",
-      "--no-check",
-      "https://raw.githubusercontent.com/galiazzi/deno-html-tools/v0.1.0/src/index.ts",
+      "https://raw.githubusercontent.com/galiazzi/deno-html-tools/v0.1.4/src/index.ts",
       "fmt",
       "-",
     ],
