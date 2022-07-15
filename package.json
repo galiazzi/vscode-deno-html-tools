@@ -5,7 +5,7 @@
     "url": "https://github.com/galiazzi/vscode-deno-html-tools"
   },
   "description": "",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "publisher": "dayan",
   "icon": "icon.png",
   "license": "MIT",
@@ -16,7 +16,8 @@
     "Formatters"
   ],
   "activationEvents": [
-    "onLanguage:html"
+    "onLanguage:html",
+    "onLanguage:vue"
   ],
   "main": "./out/extension.js",
   "scripts": {
