@@ -17,6 +17,25 @@ Config default formatter in `.vscode/settings.json` file:
 }
 ```
 
+You associate another file extension with `files.associations` config:
+
+```json
+{
+  "files.associations": {
+    "*.tt": "html"
+  }
+}
+```
+
 ## Requirements
 
 Must have [deno](https://deno.land) installed
+
+## Configuration
+
+You can control the settings for this extension through your VS Code settings
+page. You can open the settings page using the `Ctrl+,` keyboard shortcut. The
+extension has the following configuration options:
+
+- `denoHTMLTools.lintOnSave`: If true, diagnostics will made only on file save.
+  _boolean, default `false`_

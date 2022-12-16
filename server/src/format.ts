@@ -1,6 +1,28 @@
-import * as vscode from "vscode";
+import { TextDocument } from "vscode-languageserver-textdocument";
+import { TextEdit } from "vscode-languageserver";
+import { denoFormat } from "./deno";
+import { WorkspaceConfiguration } from "vscode";
 
-export default function (config: vscode.WorkspaceConfiguration) {
+const beautifyHtml = require("js-beautify").html;
+
+export async function format(
+  document: TextDocument,
+  config: WorkspaceConfiguration,
+): Promise<[TextEdit] | null> {
+  const options = optionsFromVSCode(config);
+
+  const newText = await denoFormat(beautifyHtml(document.getText(), options));
+
+  return [{
+    range: {
+      start: document.positionAt(0),
+      end: document.positionAt(document.getText().length),
+    },
+    newText,
+  }];
+}
+
+function optionsFromVSCode(config: WorkspaceConfiguration) {
   const extraLinersVal = (typeof config.html.format.extraLiners === "string")
     ? config.html.format.extraLiners
       .split(",")

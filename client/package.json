@@ -1,0 +1,15 @@
+{
+  "name": "vscode-deno-html-tools-client",
+  "license": "MIT",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^7.0.0"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@vscode/test-electron": "^2.1.2"
+  }
+}
