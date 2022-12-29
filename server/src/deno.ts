@@ -26,34 +26,50 @@ export interface DenoError {
   message: string;
 }
 
+export interface DenoOptions {
+  config?: string;
+}
+
 export interface DenoLint {
   diagnostics: DenoDiagnostic[];
   errors: DenoError[];
 }
 
-export async function denoLint(code: string): Promise<DenoLint> {
-  return JSON.parse(await denoExec("lint", code));
+export async function denoLint(
+  code: string,
+  options: DenoOptions,
+): Promise<DenoLint> {
+  return JSON.parse(await denoExec("lint", code, options));
 }
 
-export function denoFormat(code: string) {
-  return denoExec("fmt", code);
+export function denoFormat(code: string, options: DenoOptions) {
+  return denoExec("fmt", code, options);
 }
 
 export function denoExec(
   cmd: "lint" | "fmt",
   stdin: string,
+  options: DenoOptions,
 ): Promise<string> {
   const reader = Readable.from([stdin]);
 
+  const cmdParts = [
+    "run",
+    "-A",
+    "https://raw.githubusercontent.com/galiazzi/deno-html-tools/v0.1.6/src/index.ts",
+    cmd,
+    "-",
+  ];
+
+  if (options.config) {
+    cmdParts.push(`--config=${options.config}`);
+  }
+
+  console.log(cmdParts.join(" "));
+
   const subprocess = execa(
     "deno",
-    [
-      "run",
-      "-A",
-      "https://raw.githubusercontent.com/galiazzi/deno-html-tools/v0.1.5/src/index.ts",
-      cmd,
-      "-",
-    ],
+    cmdParts,
     {
       stdout: "pipe",
       stderr: "pipe",

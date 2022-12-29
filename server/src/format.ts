@@ -1,17 +1,27 @@
 import { TextDocument } from "vscode-languageserver-textdocument";
 import { TextEdit } from "vscode-languageserver";
-import { denoFormat } from "./deno";
+import { denoFormat, DenoOptions } from "./deno";
 import { WorkspaceConfiguration } from "vscode";
+import { Settings } from "./types";
 
 const beautifyHtml = require("js-beautify").html;
 
 export async function format(
+  settings: Settings,
   document: TextDocument,
   config: WorkspaceConfiguration,
 ): Promise<[TextEdit] | null> {
   const options = optionsFromVSCode(config);
 
-  const newText = await denoFormat(beautifyHtml(document.getText(), options));
+  const denoOptions: DenoOptions = {};
+  if (settings.denoConfig) {
+    denoOptions.config = settings.denoConfig;
+  }
+
+  const newText = await denoFormat(
+    beautifyHtml(document.getText(), options),
+    denoOptions,
+  );
 
   return [{
     range: {

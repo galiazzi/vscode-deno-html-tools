@@ -43,8 +43,6 @@ connection.onInitialized(() => {
 
 connection.onDidChangeConfiguration((_change) => {
   loadSettings();
-  // Revalidate all open text documents
-  // documents.all().forEach(validateTextDocument);
 });
 
 connection.onDocumentFormatting(formatDocument);
@@ -57,13 +55,19 @@ connection.onDidChangeWatchedFiles((_change) => {
 // The content of a text document has changed. This event is emitted
 // when the text document first opened or when its content has changed.
 context.documents.onDidChangeContent((change) => {
-  !context.settings.lintOnSave && validateTextDocument(change.document);
+  context.settings.lint && !context.settings.lintOnSave &&
+    validateTextDocument(change.document);
 });
 context.documents.onDidOpen((evt) => {
-  context.settings.lintOnSave && validateTextDocument(evt.document);
+  context.settings.lint && context.settings.lintOnSave &&
+    validateTextDocument(evt.document);
 });
 context.documents.onDidSave((evt) => {
-  context.settings.lintOnSave && validateTextDocument(evt.document);
+  context.settings.lint && context.settings.lintOnSave &&
+    validateTextDocument(evt.document);
+});
+context.documents.onDidClose((e) => {
+  context.documentSettings.delete(e.document.uri);
 });
 
 // Make the text document manager listen on the connection

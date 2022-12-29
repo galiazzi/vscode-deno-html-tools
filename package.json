@@ -34,10 +34,26 @@
       "type": "object",
       "title": "Deno HTML Tools",
       "properties": {
+        "denoHTMLTools.lint": {
+          "type": "boolean",
+          "default": false,
+          "description": "If true, diagnostics will made"
+        },
         "denoHTMLTools.lintOnSave": {
           "type": "boolean",
           "default": false,
           "description": "If true, diagnostics will made only on file save"
+        },
+        "denoHTMLTools.denoConfig": {
+          "type": "string",
+          "default": null,
+          "markdownDescription": "The file path to a deno configuration file. The path can be either be relative to the workspace, or an absolute path",
+          "scope": "window",
+          "examples": [
+            "./deno.jsonc",
+            "/path/to/deno.jsonc",
+            "C:\\path\\to\\deno.jsonc"
+          ]
         }
       }
     }

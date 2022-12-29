@@ -1,11 +1,17 @@
 import { TextDocument } from "vscode-languageserver-textdocument";
 import { Diagnostic, DiagnosticSeverity } from "vscode-languageserver/node";
-import { denoLint } from "./deno";
+import { denoLint, DenoOptions } from "./deno";
+import { Settings } from "./types";
 
-export async function lint(document: TextDocument) {
+export async function lint(settings: Settings, document: TextDocument) {
   const diagnostics: Diagnostic[] = [];
 
-  const lintResult = await denoLint(document.getText());
+  const denoOptions: DenoOptions = {};
+  if (settings.denoConfig) {
+    denoOptions.config = settings.denoConfig;
+  }
+
+  const lintResult = await denoLint(document.getText(), denoOptions);
 
   for (const d of lintResult?.diagnostics) {
     const diagnostic: Diagnostic = {

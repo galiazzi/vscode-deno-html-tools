@@ -20,6 +20,11 @@ export async function activate(docUri: vscode.Uri) {
   await ext.activate();
   try {
     doc = await vscode.workspace.openTextDocument(docUri);
+    await vscode.workspace.getConfiguration("denoHTMLTools").update(
+      "lint",
+      true,
+      true,
+    );
     editor = await vscode.window.showTextDocument(doc);
     await sleep(2000); // Wait for server activation
   } catch (e) {
@@ -27,7 +32,7 @@ export async function activate(docUri: vscode.Uri) {
   }
 }
 
-function sleep(ms: number) {
+export function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 

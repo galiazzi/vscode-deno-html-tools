@@ -28,7 +28,6 @@ async function testDiagnostics(
   expectedDiagnostics: vscode.Diagnostic[],
 ) {
   await activate(docUri);
-
   const actualDiagnostics = vscode.languages.getDiagnostics(docUri);
   assert.equal(actualDiagnostics.length, expectedDiagnostics.length);
 
