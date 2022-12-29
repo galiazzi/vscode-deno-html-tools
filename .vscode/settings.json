@@ -4,8 +4,9 @@
   "editor.rulers": [
     80
   ],
+  "deno.enable": false,
   "deno.lint": true,
-  "[typescript][javascript][json]": {
+  "[typescript][javascript][json][markdown]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
   },
   "files.exclude": {

@@ -65,8 +65,6 @@ export function denoExec(
     cmdParts.push(`--config=${options.config}`);
   }
 
-  console.log(cmdParts.join(" "));
-
   const subprocess = execa(
     "deno",
     cmdParts,
