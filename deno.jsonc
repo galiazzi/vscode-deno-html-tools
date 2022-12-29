@@ -1,0 +1,22 @@
+{
+  "fmt": {
+    "files": {
+      "exclude": [
+        "node_modules",
+        ".vscode-test",
+        "client/out",
+        "server/out"
+      ]
+    }
+  },
+  "lint": {
+    "files": {
+      "exclude": [
+        "node_modules",
+        ".vscode-test",
+        "client/out",
+        "server/out"
+      ]
+    }
+  }
+}

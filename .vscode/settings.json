@@ -14,5 +14,5 @@
   "search.exclude": {
     "out": true
   },
-  "typescript.tsc.autoDetect": "off",
+  "typescript.tsc.autoDetect": "off"
 }

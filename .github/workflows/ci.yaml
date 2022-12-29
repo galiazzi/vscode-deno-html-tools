@@ -11,5 +11,5 @@ jobs:
       - uses: denoland/setup-deno@v1
         with:
           deno-version: v1.x
-      - run: deno lint client server
-      - run: deno fmt --check client server
+      - run: deno lint
+      - run: deno fmt --check
