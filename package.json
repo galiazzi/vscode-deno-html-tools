@@ -18,7 +18,11 @@
   ],
   "activationEvents": [
     "onLanguage:html",
-    "onLanguage:vue"
+    "onLanguage:vue",
+    "onLanguage:javascript",
+    "onLanguage:javascriptreact",
+    "onLanguage:typescript",
+    "onLanguage:typescriptreact"
   ],
   "main": "./client/out/extension.js",
   "scripts": {

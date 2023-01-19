@@ -2,6 +2,7 @@ import { TextDocument } from "vscode-languageserver-textdocument";
 import { Diagnostic, DiagnosticSeverity } from "vscode-languageserver/node";
 import { denoLint, DenoOptions } from "./deno";
 import { Settings } from "./types";
+import { isHTML } from "./utils";
 
 export async function lint(settings: Settings, document: TextDocument) {
   const diagnostics: Diagnostic[] = [];
@@ -9,6 +10,10 @@ export async function lint(settings: Settings, document: TextDocument) {
   const denoOptions: DenoOptions = {};
   if (settings.denoConfig) {
     denoOptions.config = settings.denoConfig;
+  }
+
+  if (!isHTML(document.languageId)) {
+    denoOptions.original = true;
   }
 
   const lintResult = await denoLint(document.getText(), denoOptions);

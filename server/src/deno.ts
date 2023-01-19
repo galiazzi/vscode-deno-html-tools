@@ -28,6 +28,7 @@ export interface DenoError {
 
 export interface DenoOptions {
   config?: string;
+  original?: boolean;
 }
 
 export interface DenoLint {
@@ -53,13 +54,17 @@ export function denoExec(
 ): Promise<string> {
   const reader = Readable.from([stdin]);
 
-  const cmdParts = [
+  const cmdParts = options.original ? [cmd, "-"] : [
     "run",
     "-A",
     "https://raw.githubusercontent.com/galiazzi/deno-html-tools/v0.1.6/src/index.ts",
     cmd,
     "-",
   ];
+
+  if (options.original && cmd === "lint") {
+    cmdParts.splice(1, 0, "--json");
+  }
 
   if (options.config) {
     cmdParts.push(`--config=${options.config}`);
@@ -79,6 +84,10 @@ export function denoExec(
     let stdout = "";
     let stderr = "";
     subprocess.on("exit", (exitCode: number) => {
+      if (options.original && cmd === "lint") {
+        resolve(stdout);
+        return;
+      }
       if (exitCode !== 0) {
         reject(new Error(stderr));
       } else {

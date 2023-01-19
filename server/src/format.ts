@@ -3,6 +3,7 @@ import { TextEdit } from "vscode-languageserver";
 import { denoFormat, DenoOptions } from "./deno";
 import { WorkspaceConfiguration } from "vscode";
 import { Settings } from "./types";
+import { isHTML } from "./utils";
 
 const beautifyHtml = require("js-beautify").html;
 
@@ -16,6 +17,10 @@ export async function format(
   const denoOptions: DenoOptions = {};
   if (settings.denoConfig) {
     denoOptions.config = settings.denoConfig;
+  }
+
+  if (!isHTML(document.languageId)) {
+    denoOptions.original = true;
   }
 
   const newText = await denoFormat(

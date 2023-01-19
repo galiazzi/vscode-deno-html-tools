@@ -23,3 +23,14 @@ export async function resolveDenoConfig(
   }
   return (new URL(denoConfig, `${baseUri}/`)).pathname;
 }
+
+const notHTML = [
+  "javascript",
+  "javascriptreact",
+  "typescript",
+  "typescriptreact",
+];
+
+export function isHTML(languageId: string) {
+  return !notHTML.includes(languageId);
+}
