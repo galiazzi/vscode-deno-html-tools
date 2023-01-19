@@ -4,8 +4,6 @@
   "editor.rulers": [
     80
   ],
-  "deno.enable": false,
-  "deno.lint": true,
   "[typescript][javascript][json][markdown]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
   },
@@ -15,5 +13,8 @@
   "search.exclude": {
     "out": true
   },
-  "typescript.tsc.autoDetect": "off"
+  "typescript.tsc.autoDetect": "off",
+  "denoHTMLTools.lint": true,
+  "denoHTMLTools.lintOnSave": true,
+  "deno.enable": false
 }
