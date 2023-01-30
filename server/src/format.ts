@@ -5,14 +5,14 @@ import { WorkspaceConfiguration } from "vscode";
 import { Settings } from "./types";
 import { isHTML } from "./utils";
 
-const beautifyHtml = require("js-beautify").html;
+// const beautifyHtml = require("js-beautify").html;
 
 export async function format(
   settings: Settings,
   document: TextDocument,
-  config: WorkspaceConfiguration,
+  _config: WorkspaceConfiguration,
 ): Promise<[TextEdit] | null> {
-  const options = optionsFromVSCode(config);
+  // const options = optionsFromVSCode(config);
 
   const denoOptions: DenoOptions = {};
   if (settings.denoConfig) {
@@ -24,7 +24,7 @@ export async function format(
   }
 
   const newText = await denoFormat(
-    beautifyHtml(document.getText(), options),
+    document.getText(), // beautifyHtml(document.getText(), options),
     denoOptions,
   );
 
@@ -37,7 +37,7 @@ export async function format(
   }];
 }
 
-function optionsFromVSCode(config: WorkspaceConfiguration) {
+function _optionsFromVSCode(config: WorkspaceConfiguration) {
   const extraLinersVal = (typeof config.html.format.extraLiners === "string")
     ? config.html.format.extraLiners
       .split(",")

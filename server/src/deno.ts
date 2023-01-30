@@ -2,6 +2,8 @@ import { Readable } from "stream";
 
 const execa = require("execa");
 
+export const DENO_HTML_TOOLS_VERSION = "v0.1.8";
+
 export interface DenoDiagnostic {
   range: {
     start: {
@@ -57,7 +59,7 @@ export function denoExec(
   const cmdParts = options.original ? [cmd, "-"] : [
     "run",
     "-A",
-    "https://raw.githubusercontent.com/galiazzi/deno-html-tools/v0.1.6/src/index.ts",
+    `https://raw.githubusercontent.com/galiazzi/deno-html-tools/${DENO_HTML_TOOLS_VERSION}/src/index.ts`,
     cmd,
     "-",
   ];

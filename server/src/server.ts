@@ -15,6 +15,7 @@ import {
   loadSettings,
   validateTextDocument,
 } from "./core";
+import { DENO_HTML_TOOLS_VERSION } from "./deno";
 
 const connection = createConnection(ProposedFeatures.all);
 context.connection = connection;
@@ -39,6 +40,8 @@ connection.onInitialized(() => {
   );
   loadSettings();
   console.log("server is running");
+  console.log(`Using Deno HTML Tools ${DENO_HTML_TOOLS_VERSION}`);
+  process.env.PATH = `${process.env.PATH}:${process.env.HOME}/.deno/bin`;
 });
 
 connection.onDidChangeConfiguration((_change) => {
