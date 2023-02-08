@@ -2,7 +2,7 @@ import { Readable } from "stream";
 
 const execa = require("execa");
 
-export const DENO_HTML_TOOLS_VERSION = "v0.1.8";
+export const DENO_HTML_TOOLS_VERSION = "v0.1.9";
 
 export interface DenoDiagnostic {
   range: {
