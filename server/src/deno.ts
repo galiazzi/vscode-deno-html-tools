@@ -31,6 +31,7 @@ export interface DenoError {
 export interface DenoOptions {
   config?: string;
   original?: boolean;
+  ext?: string;
 }
 
 export interface DenoLint {
@@ -64,8 +65,12 @@ export function denoExec(
     "-",
   ];
 
-  if (options.original && cmd === "lint") {
-    cmdParts.splice(1, 0, "--json");
+  if (options.original) {
+    if (cmd === "lint") {
+      cmdParts.splice(1, 0, "--json");
+    } else if (options.ext) {
+      cmdParts.push(`--ext=${options.ext}`);
+    }
   }
 
   if (options.config) {
@@ -109,4 +114,29 @@ export function denoExec(
 
     subprocess.stdin && reader.pipe(subprocess.stdin);
   });
+}
+
+export function getExtFromLanguageId(languageId: string) {
+  if (languageId === "javascript") {
+    return "js"
+  }
+  if (languageId === "javascriptreact") {
+    return "jsx"
+  }
+  if (languageId === "typescript") {
+    return "ts"
+  }
+  if (languageId === "typescriptreact") {
+    return "tsx"
+  }
+  if (languageId === "markdown") {
+    return "md"
+  }
+  if (languageId === "json") {
+    return "json"
+  }
+  if (languageId === "jsonc") {
+    return "jsonc"
+  }
+  return undefined;
 }

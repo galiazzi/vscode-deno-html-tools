@@ -1,6 +1,6 @@
 import { TextDocument } from "vscode-languageserver-textdocument";
 import { TextEdit } from "vscode-languageserver";
-import { denoFormat, DenoOptions } from "./deno";
+import { denoFormat, DenoOptions, getExtFromLanguageId } from "./deno";
 import { WorkspaceConfiguration } from "vscode";
 import { Settings } from "./types";
 import { isHTML } from "./utils";
@@ -21,6 +21,7 @@ export async function format(
 
   if (!isHTML(document.languageId)) {
     denoOptions.original = true;
+    denoOptions.ext = getExtFromLanguageId(document.languageId);
   }
 
   const newText = await denoFormat(

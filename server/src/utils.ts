@@ -27,6 +27,9 @@ export async function resolveDenoConfig(
 const notHTML = [
   "javascript",
   "javascriptreact",
+  "json",
+  "jsonc",
+  "markdown",
   "typescript",
   "typescriptreact",
 ];

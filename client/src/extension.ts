@@ -31,11 +31,14 @@ export function activate(context: ExtensionContext) {
   const clientOptions: LanguageClientOptions = {
     documentSelector: [
       { scheme: "file", language: "html" },
-      { scheme: "file", language: "vue" },
       { scheme: "file", language: "javascript" },
       { scheme: "file", language: "javascriptreact" },
+      { scheme: "file", language: "json" },
+      { scheme: "file", language: "jsonc" },
+      { scheme: "file", language: "markdown" },
       { scheme: "file", language: "typescript" },
       { scheme: "file", language: "typescriptreact" },
+      { scheme: "file", language: "vue" },
     ],
 
     synchronize: {
@@ -44,15 +47,12 @@ export function activate(context: ExtensionContext) {
     },
   };
 
-  // Create the language client and start the client.
   client = new LanguageClient(
     "deno-html-tools",
     "Deno HTML Tools",
     serverOptions,
     clientOptions,
   );
-
-  // Start the client. This will also launch the server
   client.start();
 }
 
