@@ -118,25 +118,25 @@ export function denoExec(
 
 export function getExtFromLanguageId(languageId: string) {
   if (languageId === "javascript") {
-    return "js"
+    return "js";
   }
   if (languageId === "javascriptreact") {
-    return "jsx"
+    return "jsx";
   }
   if (languageId === "typescript") {
-    return "ts"
+    return "ts";
   }
   if (languageId === "typescriptreact") {
-    return "tsx"
+    return "tsx";
   }
   if (languageId === "markdown") {
-    return "md"
+    return "md";
   }
   if (languageId === "json") {
-    return "json"
+    return "json";
   }
   if (languageId === "jsonc") {
-    return "jsonc"
+    return "jsonc";
   }
   return undefined;
 }
