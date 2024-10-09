@@ -39,6 +39,11 @@ export function activate(context: ExtensionContext) {
       { scheme: "file", language: "typescript" },
       { scheme: "file", language: "typescriptreact" },
       { scheme: "file", language: "vue" },
+      { scheme: "file", language: "yaml" },
+      { scheme: "file", language: "css" },
+      { scheme: "file", language: "scss" },
+      { scheme: "file", language: "sass" },
+      { scheme: "file", language: "less" },
     ],
 
     synchronize: {

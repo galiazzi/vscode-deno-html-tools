@@ -68,7 +68,13 @@ export function denoExec(
   if (options.original) {
     if (cmd === "lint") {
       cmdParts.splice(1, 0, "--json");
-    } else if (options.ext) {
+    } else {
+      if (options.ext && options.ext === "vue") {
+        cmdParts.push("--unstable-component");
+      }
+    }
+
+    if (options.ext) {
       cmdParts.push(`--ext=${options.ext}`);
     }
   }
@@ -132,11 +138,5 @@ export function getExtFromLanguageId(languageId: string) {
   if (languageId === "markdown") {
     return "md";
   }
-  if (languageId === "json") {
-    return "json";
-  }
-  if (languageId === "jsonc") {
-    return "jsonc";
-  }
-  return undefined;
+  return languageId;
 }

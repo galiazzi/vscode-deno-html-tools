@@ -1,6 +1,6 @@
 import { TextDocument } from "vscode-languageserver-textdocument";
 import { Diagnostic, DiagnosticSeverity } from "vscode-languageserver/node";
-import { denoLint, DenoOptions } from "./deno";
+import { denoLint, DenoOptions, getExtFromLanguageId } from "./deno";
 import { Settings } from "./types";
 import { isHTML } from "./utils";
 
@@ -14,6 +14,10 @@ export async function lint(settings: Settings, document: TextDocument) {
 
   if (!isHTML(document.languageId)) {
     denoOptions.original = true;
+  }
+
+  if (["javascriptreact", "typescriptreact"].includes(document.languageId)) {
+    denoOptions.ext = getExtFromLanguageId(document.languageId);
   }
 
   const lintResult = await denoLint(document.getText(), denoOptions);

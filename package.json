@@ -25,7 +25,12 @@
     "onLanguage:markdown",
     "onLanguage:typescript",
     "onLanguage:typescriptreact",
-    "onLanguage:vue"
+    "onLanguage:vue",
+    "onLanguage:yaml",
+    "onLanguage:css",
+    "onLanguage:scss",
+    "onLanguage:sass",
+    "onLanguage:less"
   ],
   "main": "./client/out/extension.js",
   "scripts": {
@@ -61,6 +66,16 @@
             "/path/to/deno.jsonc",
             "C:\\path\\to\\deno.jsonc"
           ]
+        },
+        "denoHTMLTools.useDenoOriginalHTMLFormatting": {
+          "type": "boolean",
+          "default": false,
+          "description": "If true, the original Deno formatting will be used (requires Deno version 2 or higher)"
+        },
+        "denoHTMLTools.useDenoOriginalComponentFormatting": {
+          "type": "boolean",
+          "default": false,
+          "description": "If true, the original Deno formatting will be used for vue files (requires Deno version 2 or higher)"
         }
       }
     }

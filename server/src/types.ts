@@ -12,4 +12,6 @@ export interface Settings {
   lint: boolean;
   lintOnSave: boolean;
   denoConfig?: string;
+  useDenoOriginalHTMLFormatting?: false;
+  useDenoOriginalComponentFormatting?: false;
 }

@@ -8,6 +8,12 @@
     ]
   },
   "lint": {
+    "rules": {
+      "exclude": [
+        "no-process-globals",
+        "no-node-globals"
+      ]
+    },
     "exclude": [
       "node_modules",
       ".vscode-test",

@@ -24,16 +24,23 @@ export async function resolveDenoConfig(
   return (new URL(denoConfig, `${baseUri}/`)).pathname;
 }
 
-const notHTML = [
-  "javascript",
-  "javascriptreact",
-  "json",
-  "jsonc",
-  "markdown",
-  "typescript",
-  "typescriptreact",
+const extHTML = [
+  "html",
+  "vue",
 ];
 
 export function isHTML(languageId: string) {
-  return !notHTML.includes(languageId);
+  return extHTML.includes(languageId);
+}
+
+const lint = [
+  "html",
+  "vue",
+  "javascript",
+  "javascriptreact",
+  "typescript",
+  "typescriptreact",
+];
+export function lintEnabled(languageId: string) {
+  return lint.includes(languageId);
 }

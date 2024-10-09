@@ -3,9 +3,12 @@ import { TextDocument } from "vscode-languageserver-textdocument";
 import { lint } from "./lint";
 import { format } from "./format";
 import { Context, Settings } from "./types";
-import { resolveDenoConfig } from "./utils";
+import { lintEnabled, resolveDenoConfig } from "./utils";
 
-export const defaultSettings: Settings = { lint: false, lintOnSave: false };
+export const defaultSettings: Settings = {
+  lint: false,
+  lintOnSave: false,
+};
 
 export const context: Context = {
   settings: defaultSettings,
@@ -15,9 +18,11 @@ export const context: Context = {
 export async function validateTextDocument(
   document: TextDocument,
 ): Promise<void> {
-  const settings = await getDocumentSettings(document);
-  const diagnostics = await lint(settings, document);
-  context.connection?.sendDiagnostics({ uri: document.uri, diagnostics });
+  if (lintEnabled(document.languageId)) {
+    const settings = await getDocumentSettings(document);
+    const diagnostics = await lint(settings, document);
+    context.connection?.sendDiagnostics({ uri: document.uri, diagnostics });
+  }
 }
 
 export async function loadSettings() {
